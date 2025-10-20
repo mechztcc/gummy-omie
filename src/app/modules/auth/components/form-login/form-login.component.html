@@ -1,0 +1,23 @@
+<form [formGroup]="form" class="flex flex-col w-full px-10 md:px-20 lg:px-20 h-screen justify-center" (ngSubmit)="onSubmit()">
+	<div class="flex justify-start">
+		<img src="assets/logo.png" class="h-30 w-30 " alt="">
+	</div>
+  <h1 class="text-3xl font-semi">Bem-vindo</h1>
+  <span class="text-zinc-700"> Preencha o formulário abaixo para acessar o sistema </span>
+
+  <app-custom-input class="mt-10 w-full" [config]="{ label: 'Email', placeholder: '', type: 'text' }" formControlName="email">
+    <fa-icon prepend class="text-zinc-500 px-2 py-1" [icon]="icons.user" />
+  </app-custom-input>
+
+  <app-custom-input class="mt-5 w-full" [config]="{ label: 'Senha', placeholder: '', type: isHiddenPass ? 'text' : 'password' }" formControlName="password">
+		<button class="cursor-pointer px-2 py-1 bg-zinc-100 rounded hover:opacity-80" prepend (click)="onHandlePassword()" type="button">
+			<fa-icon  class="text-zinc-500" [icon]="icons.lock" />
+		</button>
+  </app-custom-input>
+
+	<div class="flex justify-end mt-1">
+		<span class="text-zinc-700 hover:cursor-pointer hover:opacity-80">Esqueceu a senha?</span>
+	</div>
+
+	<app-custom-button class="w-full mt-10" [label]="'Entrar'" />
+</form>

@@ -1,0 +1,7 @@
+<button class="flex items-center justify-center bg-primary px-5 py-3 rounded text-zinc-50 hover:opacity-80 cursor-pointer w-full">
+  <ng-content select="[prepend]"></ng-content>
+  <span class="text-xl">
+    <b>{{ label() }}</b>
+  </span>
+  <ng-content select="[append]"></ng-content>
+</button>

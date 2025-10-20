@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import 'tailwindcss';
 
-@import "tailwindcss";
+* {
+  font-family: 'Baloo 2', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.bg-primary {
+  background-color: #e31c79;
+}
+
+.text-primary {
+  color: #e31c79 !important;
+}
