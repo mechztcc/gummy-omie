@@ -1,0 +1,24 @@
+<div class="flex flex-col justify-between bg-zinc-800 h-screen px-3 sidebar">
+  <div class="flex flex-col">
+    <div class="flex flex-col items-center justify-center text-zinc-50">
+      <img src="assets/logo.png" class="w-30 h-30" alt="" />
+ 
+    </div>
+
+    @for (item of items; track $index) {
+    <button
+      class="flex items-center justify-start cursor-pointer mt-2 text-xl px-5 py-3 rounded text-zinc-50 hover:bg-zinc-900"
+    >
+      <fa-icon [icon]="item.icon" />
+      <span class="mx-2">{{ item.label }}</span>
+    </button>
+    }
+  </div>
+
+  <button
+    class="flex items-center justify-start cursor-pointer mt-2 mb-5 text-xl px-5 py-3 rounded text-zinc-50 hover:bg-zinc-900"
+  >
+    <fa-icon [icon]="icons.exit" />
+    <span class="mx-2">Sair</span>
+  </button>
+</div>
