@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faBox,
@@ -18,7 +19,7 @@ interface SidebarItem {
 
 @Component({
   selector: 'app-sidebar',
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, RouterModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
@@ -33,7 +34,7 @@ export class SidebarComponent {
       icon: faHouse,
     },
     {
-      label: 'Filas',
+      label: 'Monitoramento',
       icon: faChartSimple,
     },
     {
