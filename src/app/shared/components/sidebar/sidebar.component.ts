@@ -1,5 +1,6 @@
+import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faBox,
@@ -15,11 +16,13 @@ import {
 interface SidebarItem {
   label: string;
   icon: IconDefinition;
+  action: Function;
+  active: Function;
 }
 
 @Component({
   selector: 'app-sidebar',
-  imports: [FontAwesomeModule, RouterModule],
+  imports: [FontAwesomeModule, RouterModule, NgClass],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
@@ -28,30 +31,68 @@ export class SidebarComponent {
     exit: faRightFromBracket,
   };
 
+  constructor(private router: Router, private routes: ActivatedRoute) {}
+
   items: SidebarItem[] = [
     {
       label: 'Dashboard',
       icon: faHouse,
+      action: () => {
+        this.router.navigate(['/dashboard']);
+      },
+      active: () => {
+        return window.location.href.includes('dashboard');
+      },
     },
     {
       label: 'Monitoramento',
       icon: faChartSimple,
+      action: () => {
+        this.router.navigate(['/monitoring-queues']);
+      },
+      active: () => {
+        return window.location.href.includes('monitoring-queues');
+      },
     },
     {
       label: 'Reintegrar pedido',
       icon: faBoxesPacking,
+      action: () => {
+        this.router.navigate(['/anastasia']);
+      },
+      active: () => {
+        return window.location.href.includes('anastasia');
+      },
     },
     {
       label: 'Pedidos filtrados',
       icon: faBoxesStacked,
+      action: () => {
+        this.router.navigate(['/literal']);
+      },
+      active: () => {
+        return window.location.href.includes('literal');
+      },
     },
     {
       label: 'Pedidos manuais',
       icon: faBoxOpen,
+      action: () => {
+        this.router.navigate(['/osvaldo']);
+      },
+      active: () => {
+        return window.location.href.includes('osvaldo');
+      },
     },
     {
       label: 'Pedidos ausentes',
       icon: faBox,
+      action: () => {
+        this.router.navigate(['/astec']);
+      },
+      active: () => {
+        return window.location.href.includes('astec');
+      },
     },
   ];
 }

@@ -1,0 +1,23 @@
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+  <div class="col-span-4 text-zinc-700">
+    <h1 class="text-3xl"><b>Monitoramento de filas</b></h1>
+    <span class=""> Acompanhe o status das filas de processamento </span>
+  </div>
+
+  @for (item of items; track $index) {
+  <div class="col-span-1">
+    <div [ngClass]="['flex flex-col px-5 py-5 text-zinc-700 border rounded-lg', item.color, item.border]">
+      <h1 class="text-3xl">{{ item.value }}</h1>
+      <span>{{ item.label }}</span>
+    </div>
+  </div>
+  }
+
+  <div class="col-span-4 mt-10">
+    <app-pending-jobs />
+  </div>
+
+  <div class="col-span-4 mt-10">
+    <app-failed-jobs />
+  </div>
+</div>

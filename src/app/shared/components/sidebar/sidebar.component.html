@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-between bg-zinc-800 h-screen px-3 sidebar shadow">
+<div class="flex flex-col justify-between sticky top-0 bg-zinc-800 h-screen px-3 sidebar shadow">
   <div class="flex flex-col">
     <div class="flex flex-col items-center justify-center text-zinc-50">
       <img src="assets/logo.png" class="w-30 h-30" alt="" />
@@ -6,7 +6,11 @@
 
     @for (item of items; track $index) {
     <button
-      class="flex items-center justify-start cursor-pointer mt-2 text-xl px-5 py-3 rounded text-zinc-50 hover:bg-zinc-900"
+      (click)="item.action()"
+      [ngClass]="{
+        'flex items-center justify-start cursor-pointer mt-2 text-xl px-5 py-3 rounded text-zinc-50 hover:bg-zinc-900': true,
+        'bg-zinc-900': item.active()
+      }"
     >
       <fa-icon [icon]="item.icon" />
       <span class="mx-2">{{ item.label }}</span>
