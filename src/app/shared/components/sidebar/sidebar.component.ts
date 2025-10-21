@@ -58,10 +58,10 @@ export class SidebarComponent {
       label: 'Reintegrar pedido',
       icon: faBoxesPacking,
       action: () => {
-        this.router.navigate(['/anastasia']);
+        this.router.navigate(['/orders/reintegrate']);
       },
       active: () => {
-        return window.location.href.includes('anastasia');
+        return window.location.href.includes('orders/reintegrate');
       },
     },
     {

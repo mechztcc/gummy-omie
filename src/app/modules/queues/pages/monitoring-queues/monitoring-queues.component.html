@@ -6,8 +6,8 @@
 
   @for (item of items; track $index) {
   <div class="col-span-1">
-    <div [ngClass]="['flex flex-col px-5 py-5 text-zinc-700 border rounded-lg', item.color, item.border]">
-      <h1 class="text-3xl">{{ item.value }}</h1>
+    <div [ngClass]="['flex flex-col px-5 py-5 text-zinc-700 border rounded-lg bg-zinc-50 border-zinc-300']">
+      <h1 class="text-3xl"><b>{{ item.value }}</b></h1>
       <span>{{ item.label }}</span>
     </div>
   </div>

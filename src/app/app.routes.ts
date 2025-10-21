@@ -13,4 +13,8 @@ export const routes: Routes = [
     path: 'monitoring-queues',
     loadChildren: () => import('./modules/queues/queues.module').then((m) => m.QueuesModule),
   },
+  {
+    path: 'orders',
+    loadChildren: () => import('./modules/orders/orders.module').then((m) => m.OrdersModule),
+  },
 ];
