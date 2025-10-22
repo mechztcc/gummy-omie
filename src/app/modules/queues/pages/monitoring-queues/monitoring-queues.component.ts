@@ -1,12 +1,12 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { CustomTableComponent } from '../../../../shared/components/custom-table/custom-table.component';
-import { PendingJobsComponent } from "../../components/pending-jobs/pending-jobs.component";
-import { FailedJobsComponent } from "../../components/failed-jobs/failed-jobs.component";
+import { PendingJobsComponent } from '../../components/pending-jobs/pending-jobs.component';
+import { FailedJobsComponent } from '../../components/failed-jobs/failed-jobs.component';
 
 @Component({
   selector: 'app-monitoring-queues',
-  imports: [NgClass, CustomTableComponent, PendingJobsComponent, FailedJobsComponent],
+  imports: [NgClass, PendingJobsComponent, FailedJobsComponent],
   templateUrl: './monitoring-queues.component.html',
   styleUrl: './monitoring-queues.component.scss',
 })
