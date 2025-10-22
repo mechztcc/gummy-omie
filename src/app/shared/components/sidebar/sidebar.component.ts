@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -12,6 +12,7 @@ import {
   faRightFromBracket,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
+import { SidebarStore } from '../../stores/sidebar/sidebar.store';
 
 interface SidebarItem {
   label: string;
@@ -31,7 +32,10 @@ export class SidebarComponent {
     exit: faRightFromBracket,
   };
 
-  constructor(private router: Router, private routes: ActivatedRoute) {}
+  store = inject(SidebarStore);
+
+  constructor(private router: Router, private routes: ActivatedRoute) {
+  }
 
   items: SidebarItem[] = [
     {

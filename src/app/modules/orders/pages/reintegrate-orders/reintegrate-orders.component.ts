@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBoxes, faHashtag, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBoxes, faBoxOpen, faHashtag, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
 import { CustomInputComponent } from '../../../../shared/components/custom-input/custom-input.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -12,7 +12,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class ReintegrateOrdersComponent {
   icons: any = {
-    box: faBoxes,
+    boxes: faBoxes,
+    box: faBoxOpen,
     id: faHashtag,
     close: faXmarkCircle,
   };
