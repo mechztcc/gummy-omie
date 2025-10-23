@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { CardDashboardMenuComponent } from '../../components/card-dashboard-menu/card-dashboard-menu.component';
 import { CardStatsComponent } from '../../components/card-stats/card-stats.component';
 import { DashboardService } from '../../shared/services/dashboard.service';
-import { faBoxesPacking } from '@fortawesome/free-solid-svg-icons';
-import { CardDashboardMenuComponent } from '../../components/card-dashboard-menu/card-dashboard-menu.component';
+import { DashboardStore } from '../../shared/stores/dashboard/dashboard.store';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -11,33 +11,6 @@ import { CardDashboardMenuComponent } from '../../components/card-dashboard-menu
   styleUrl: './dashboard-page.component.scss',
 })
 export class DashboardPageComponent implements OnInit {
-  data: any[] = [
-    {
-      label: 'Pedidos',
-      value: '50,000',
-      subtitle: 'Total de pedidos processados',
-      icon: faBoxesPacking,
-    },
-    {
-      label: 'Pedidos',
-      value: '50,000',
-      subtitle: 'Total de pedidos processados',
-      icon: faBoxesPacking,
-    },
-    {
-      label: 'Pedidos',
-      value: '50,000',
-      subtitle: 'Total de pedidos processados',
-      icon: faBoxesPacking,
-    },
-    {
-      label: 'Pedidos',
-      value: '50,000',
-      subtitle: 'Total de pedidos processados',
-      icon: faBoxesPacking,
-    },
-  ];
-
   items: any[] = [
     {
       title: 'Gerenciar Pedidos',
@@ -56,6 +29,10 @@ export class DashboardPageComponent implements OnInit {
     },
   ];
 
+  store = inject(DashboardStore);
+
+  isLoading: boolean = false;
+
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
@@ -63,9 +40,14 @@ export class DashboardPageComponent implements OnInit {
   }
 
   onList() {
-    this.dashboardService.onListHistory().subscribe((data) => {
-      this.data = data['data'].step_stats;
-      console.log(this.data);
-    });
+    this.isLoading = true;
+    this.dashboardService
+      .onListHistory()
+      .subscribe((data) => {
+        this.store.updateDashboardData(data);
+      })
+      .add(() => {
+        this.isLoading = false;
+      });
   }
 }

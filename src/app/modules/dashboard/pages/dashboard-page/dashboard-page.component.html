@@ -4,9 +4,9 @@
     <span class=""> Gerencie pedidos, monitore logs e acompanhe o status das filas de processamento </span>
   </div>
 
-  @for (item of data; track $index) {
+  @for (item of store.data(); track $index) {
   <div class="col-span-2 md:col-span-2 lg:col-span-1">
-    <app-card-stats [data]="item" />
+    <app-card-stats [data]="item" [isLoading]="isLoading" />
   </div>
   }
 </div>
