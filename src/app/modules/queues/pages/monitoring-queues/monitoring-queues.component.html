@@ -7,17 +7,23 @@
   @for (item of items; track $index) {
   <div class="col-span-2 md:col-span-2 lg:col-span-1">
     <div [ngClass]="['flex flex-col px-5 py-5 text-zinc-700 border rounded-lg bg-zinc-50 border-zinc-300']">
-      <h1 class="text-3xl"><b>{{ item.value }}</b></h1>
+      @if(isLoading) {
+        <fa-icon [icon]="icons.load" class="spin w-fit" />
+      }
+
+      @if(!isLoading) {
+        <h1 class="text-3xl"><b>{{ item.value }}</b></h1>
+      }
       <span>{{ item.label }}</span>
     </div>
   </div>
   }
 
   <div class="col-span-2 lg:col-span-4 mt-10">
-    <app-pending-jobs />
+    <app-pending-jobs [data]="waitingJobs" [isLoading]="isLoadingWaiting" />
   </div>
 
   <div class="col-span-2 lg:col-span-4 mt-10">
-    <app-failed-jobs />
+    <app-failed-jobs [data]="failedJobs" [isLoading]="isLoadingFailed" />
   </div>
 </div>

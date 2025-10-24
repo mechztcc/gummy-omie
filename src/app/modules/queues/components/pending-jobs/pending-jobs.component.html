@@ -2,9 +2,10 @@
   <div class="flex my-5">
     <h1 class="text-3xl text-zinc-700"><b>Jobs Pendentes</b></h1>
   </div>
-  <hr class="w-full text-zinc-200">
+  <hr class="w-full text-zinc-200" />
 
   <table class="min-w-full divide-y divide-gray-200">
+    @if(!isLoading() && data().length > 0) {
     <thead class="bg-gray-50">
       <tr>
         @for (item of table.cols; track $index) {
@@ -14,9 +15,24 @@
         }
       </tr>
     </thead>
+    } 
+    
+    @if(isLoading()) {
+    <div class="flex flex-col justify-center text-zinc-700">
+      <fa-icon [icon]="icons.load" class="w-fit spin" />
+      <span>Buscando informações...</span>
+    </div>
+    } 
 
+    @if(!isLoading() && data().length === 0) {
+    <div class="flex flex-col justify-center text-zinc-700">
+      <span>Nenhuma informação encontrada...</span>
+    </div>
+    } 
+    
+    @if(!isLoading()) {
     <tbody class="divide-y divide-gray-100">
-      @for (item of table.rows; track $index) {
+      @for (item of data() | paginate: { id: 'failedJobs', itemsPerPage: 5, currentPage: p }; track $index) {
       <tr class="hover:bg-gray-100">
         <td class="px-6 py-4 whitespace-nowrap">
           <div class="flex items-center gap-3">
@@ -25,27 +41,23 @@
         </td>
 
         <td class="px-6 py-4 whitespace-nowrap">
-          <div class="text-sm text-gray-900">{{ item.job }}</div>
+          <div class="text-sm text-gray-900">{{ item.name }}</div>
         </td>
 
         <td class="px-6 py-4 whitespace-nowrap hidden sm:table-cell">
-          <div class="text-sm text-gray-900">{{ item.queue }}</div>
+          <div class="text-center text-zinc-50 bg-primary rounded-full px-2">OMIE</div>
         </td>
 
         <td class="px-6 py-4 whitespace-nowrap hidden sm:table-cell">
-          <div class="text-sm text-gray-900">{{ item.retry }}</div>
+          <div class="text-sm text-gray-900">{{ item.timestamp | date : 'dd/MM/yyyy hh:mm:ss' }}</div>
         </td>
 
         <td class="px-6 py-4 whitespace-nowrap hidden sm:table-cell">
-          <div class="text-sm text-gray-900">{{ item.createdAt | date : 'dd/MM/yyyy hh:mm' }}</div>
+          <div class="text-sm text-gray-900">{{ item.failedReason }}</div>
         </td>
 
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-          <button
-            class="px-3 py-2 rounded bg-zinc-700  text-zinc-50  mx-2 cursor-pointer"
-          >
-            Editar
-          </button>
+          <button class="px-3 py-2 rounded bg-zinc-700 text-zinc-50 mx-2 cursor-pointer">Editar</button>
           <button class="px-3 py-2 rounded bg-red-300 hover:bg-red-400 hover:text-zinc-50 text-zinc-50 cursor-pointer">
             Remover
           </button>
@@ -53,9 +65,12 @@
       </tr>
       }
     </tbody>
+    }
   </table>
 
-  <div class="flex flex-wrap justify-end mb-5 mt-10">
+
+  @if(data().length > 0) {
+      <div class="flex flex-wrap justify-end mb-5 mt-10">
     <pagination-controls
       (pageChange)="p = $event"
       id="lastSupervisions"
@@ -63,4 +78,6 @@
       [nextLabel]="'Próximo'"
     />
   </div>
+  }
+
 </div>

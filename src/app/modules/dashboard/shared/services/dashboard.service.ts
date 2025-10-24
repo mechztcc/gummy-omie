@@ -12,4 +12,20 @@ export class DashboardService {
   onListHistory(): Observable<{ total_orders: number; total_logs: number; successful_integrations: number }> {
     return this.http.get<any>(`${environment.api}/history-logs/stats`).pipe(map((resp) => resp.data));
   }
+
+  onListQueueStats(): Observable<any> {
+    return this.http.get<any>(`${environment.api}/queues/stats`).pipe(map((resp) => resp.data));
+  }
+
+  onListFailedJobs(): Observable<any> {
+    return this.http
+      .get<any>(`${environment.api}/queues/omie/jobs?status=failed&start=0&end=50`)
+      .pipe(map((resp) => resp.data));
+  }
+
+  onListWaitingJobs(): Observable<any> {
+    return this.http
+      .get<any>(`${environment.api}/queues/omie/jobs?status=waiting&start=0&end=50`)
+      .pipe(map((resp) => resp.data));
+  }
 }
