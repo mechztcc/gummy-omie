@@ -1,0 +1,16 @@
+@if (service.isRunning) {
+<div
+  [ngClass]="{
+    'flex justify-end p-3 absolute text-zinc-50 right-0 top-0 rounded-lg my-2 mx-2 shadow-lg size z-20': true,
+    'bg-red-400 tour-toastr-error': service.type === 'error',
+    'bg-green-400 tour-toastr-success': service.type === 'success'
+  }"
+  (click)="service.onClose()"
+>
+  <fa-icon [icon]="service.type === 'success' ? icons.check : icons.error" class="mr-2"></fa-icon>
+  <span
+    ><b>{{ service.msg }}</b></span
+  >
+  <fa-icon [icon]="icons.close" class="ml-2 cursor-pointer"></fa-icon>
+</div>
+}

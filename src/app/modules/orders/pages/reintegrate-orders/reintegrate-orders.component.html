@@ -19,9 +19,23 @@
         <fa-icon prepend [icon]="icons.id" />
       </app-custom-input>
 
-      <button class="mt-5 rounded-lg px-5 py-3 bg-zinc-100 bg-zinc-700 hover:opacity-80 text-zinc-50 cursor-pointer">
+      @if(!isLoadingSingle) {
+      <button
+        (click)="onSubmitSingle()"
+        class="mt-5 rounded-lg px-5 py-3 bg-zinc-100 bg-zinc-700 hover:opacity-80 text-zinc-50 cursor-pointer"
+      >
         Reintegrar pedido
       </button>
+      } 
+      
+      
+      @if(isLoadingSingle) {
+      <button
+        class="mt-5 rounded-lg px-5 py-3 bg-zinc-100 bg-zinc-700 hover:opacity-80 text-zinc-50 cursor-pointer"
+      >
+        <fa-icon [icon]="icons.load" class="spin w-fit" />
+      </button>
+      }
     </div>
   </div>
 
@@ -63,12 +77,22 @@
         }
       </div>
 
-      <button class="mt-5 rounded-lg px-5 py-3 bg-zinc-100 bg-zinc-700 hover:opacity-80 text-zinc-50 cursor-pointer">
-        Reintegrar pedidos 
-        @if(multiples.length > 0) {
+
+      @if(!isLoadingMultiple) {
+        <button (click)="onSubmitMultiple()" class="mt-5 rounded-lg px-5 py-3 bg-zinc-100 bg-zinc-700 hover:opacity-80 text-zinc-50 cursor-pointer">
+          Reintegrar pedidos @if(multiples.length > 0) {
           <b class="px-2 bg-primary rounded-full">{{ multiples.length }}</b>
-        }
+          }
+        </button>
+      }
+
+      @if(isLoadingMultiple) {
+      <button
+        class="mt-5 rounded-lg px-5 py-3 bg-zinc-100 bg-zinc-700 hover:opacity-80 text-zinc-50 cursor-pointer"
+      >
+        <fa-icon [icon]="icons.load" class="spin w-fit" />
       </button>
+      }
     </div>
   </div>
 </form>

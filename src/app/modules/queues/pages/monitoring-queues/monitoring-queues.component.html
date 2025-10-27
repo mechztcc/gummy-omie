@@ -20,10 +20,10 @@
   }
 
   <div class="col-span-2 lg:col-span-4 mt-10">
-    <app-pending-jobs [data]="waitingJobs" [isLoading]="isLoadingWaiting" />
+    <app-pending-jobs [data]="waitingJobs" [isLoading]="isLoadingWaiting" (reload)="onListWaitingJobs()" />
   </div>
 
   <div class="col-span-2 lg:col-span-4 mt-10">
-    <app-failed-jobs [data]="failedJobs" [isLoading]="isLoadingFailed" />
+    <app-failed-jobs [data]="failedJobs" [isLoading]="isLoadingFailed" (reload)="onListFailedJobs()"/>
   </div>
 </div>

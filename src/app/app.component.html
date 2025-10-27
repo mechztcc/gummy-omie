@@ -1,6 +1,21 @@
-<div class="flex relative">
+@if(isAuth) {
+  <div class="flex relative">
+  <app-toaster />
+
+  <div class="w-full">
+    <div class="">
+      <router-outlet />
+    </div>
+  </div>
+</div>
+}
+
+
+@if(!isAuth) {
+  <div class="flex relative">
   <app-sidebar />
-  
+  <app-toaster />
+
   <div class="w-full">
     <app-header />
     <div class="px-5 py-5">
@@ -8,3 +23,4 @@
     </div>
   </div>
 </div>
+}

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Config } from '../../../../shared/interfaces/custom-table.interface';
 import { DatePipe } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -12,6 +12,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
   styleUrl: './pending-jobs.component.scss',
 })
 export class PendingJobsComponent {
+  reload = output<boolean>();
   data = input<{ id: number; name: string; queue: string; timestamp: string; failedReason: string }[]>([]);
   isLoading = input<boolean>();
 
@@ -40,4 +41,8 @@ export class PendingJobsComponent {
       },
     ],
   };
+
+  onReload() {
+    this.reload.emit(true);
+  }
 }

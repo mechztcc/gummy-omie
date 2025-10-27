@@ -28,4 +28,12 @@ export class DashboardService {
       .get<any>(`${environment.api}/queues/omie/jobs?status=waiting&start=0&end=50`)
       .pipe(map((resp) => resp.data));
   }
+
+  onReintegrateSingle(payload: { shopify_id: number }): Observable<any> {
+    return this.http.post<any>(`${environment.api}/orders/reintegrate`, payload).pipe(map((resp) => resp.data));
+  }
+
+  onReintegrateMultiple(payload: { shopify_ids: string[] }): Observable<any> {
+    return this.http.post<any>(`${environment.api}/orders/reintegrate-multiple`, payload).pipe(map((resp) => resp.data));
+  }
 }

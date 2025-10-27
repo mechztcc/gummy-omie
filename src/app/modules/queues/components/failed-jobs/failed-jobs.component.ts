@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Config } from '../../../../shared/interfaces/custom-table.interface';
 import { DatePipe } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -12,14 +12,15 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
   styleUrl: './failed-jobs.component.scss',
 })
 export class FailedJobsComponent {
+  reload = output<boolean>();
   data = input<{ id: number; name: string; queue: string; timestamp: string; failedReason: string }[]>([]);
   isLoading = input<boolean>();
 
   p: any;
 
   icons: any = {
-    load: faCircleNotch
-  }
+    load: faCircleNotch,
+  };
 
   table: Config = {
     cols: ['id', 'job', 'fila', 'falhou em', 'exceção', 'ações'],
@@ -33,4 +34,8 @@ export class FailedJobsComponent {
       },
     ],
   };
+
+  onReload() {
+    this.reload.emit(true);
+  }
 }
