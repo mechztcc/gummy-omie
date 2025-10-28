@@ -1,0 +1,32 @@
+<div class="grid grid-cols-3 text-zinc-700">
+  <div class="col-span-3 text-zinc-700">
+    <h1 class="text-3xl"><b>Histórico de Logs </b></h1>
+    <div class="flex justify-between">
+      <span class=""> Acompanhe o histórico de logs de falhas na integração </span>
+      <button class="px-5 py-2 hover:opacity-80 cursor-pointer bg-zinc-700 text-zinc-50 rounded" (click)="onListLogs()"><b>Atualizar</b></button>
+    </div>
+  </div>
+
+  @if(store.data().length > 0 && !isLoading) {
+  <div class="col-span-3">
+    <div class="flex flex-wrap justify-end mb-5 mt-10">
+      <pagination-controls (pageChange)="p = $event" [previousLabel]="'Anterior'" [nextLabel]="'Próximo'" />
+    </div>
+  </div>
+  }
+
+  @if(isLoading) {
+    <div class="flex flex-col text-zinc-700">
+      <fa-icon [icon]="icons.load" class="w-fit spin" />
+      <span>Buscando informações...</span>
+    </div>
+  }
+
+  @if(store.data().length > 0 && !isLoading) {
+    <div class="col-span-3">
+    @for (item of store.data() | paginate: { itemsPerPage: 3, currentPage: p }; track $index) {
+    <app-log-card [item]="item" />
+    }
+  </div>
+  }
+</div>

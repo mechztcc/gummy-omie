@@ -72,10 +72,10 @@ export class SidebarComponent {
       label: 'Pedidos filtrados',
       icon: faBoxesStacked,
       action: () => {
-        this.router.navigate(['/literal']);
+        this.router.navigate(['/logs']);
       },
       active: () => {
-        return window.location.href.includes('literal');
+        return window.location.href.includes('logs');
       },
     },
     {
