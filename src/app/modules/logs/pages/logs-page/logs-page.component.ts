@@ -5,11 +5,20 @@ import { LogCardComponent } from '../../components/log-card/log-card.component';
 import { HistoryLog } from '../../shared/interfaces/history-logs.interface';
 import { LogsService } from '../../shared/services/logs.service';
 import { LogsStore } from '../../shared/stores/logs.store';
-import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { faBoxes, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { CustomInputComponent } from '../../../../shared/components/custom-input/custom-input.component';
+import { FormBuilder, FormGroup, ɵInternalFormsSharedModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-logs-page',
-  imports: [NgxPaginationModule, FontAwesomeModule, LogCardComponent],
+  imports: [
+    NgxPaginationModule,
+    FontAwesomeModule,
+    LogCardComponent,
+    CustomInputComponent,
+    ɵInternalFormsSharedModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './logs-page.component.html',
   styleUrl: './logs-page.component.scss',
 })
@@ -22,13 +31,20 @@ export class LogsPageComponent implements OnInit {
 
   store = inject(LogsStore);
   icons: any = {
-    load: faCircleNotch
+    load: faCircleNotch,
+    box: faBoxes,
+  };
+
+  form: FormGroup;
+
+  constructor(private logsService: LogsService, private fb: FormBuilder) {
+    this.form = this.fb.group({
+      orderId: [''],
+    });
   }
 
-  constructor(private logsService: LogsService) {}
-
   ngOnInit(): void {
-    if(this.store.data().length == 0) {
+    if (this.store.data().length == 0) {
       this.onListLogs();
     }
   }
@@ -41,7 +57,24 @@ export class LogsPageComponent implements OnInit {
       .subscribe((data) => {
         this.data = data;
         this.store.setData(data);
-        
+      })
+      .add(() => {
+        this.isLoading = false;
+      });
+  }
+
+
+
+  onFindOrder() {
+    this.isLoading = true;
+    const orderId = this.form.get('orderId')?.value;
+    const payload = orderId?.trim();
+
+    this.logsService
+      .onFindOrderLogs(payload)
+      .subscribe((data) => {
+        this.data = data;
+        this.store.setData(data);
       })
       .add(() => {
         this.isLoading = false;
