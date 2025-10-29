@@ -3,6 +3,7 @@ import { CardDashboardMenuComponent } from '../../components/card-dashboard-menu
 import { CardStatsComponent } from '../../components/card-stats/card-stats.component';
 import { DashboardService } from '../../shared/services/dashboard.service';
 import { DashboardStore } from '../../shared/stores/dashboard/dashboard.store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -16,16 +17,25 @@ export class DashboardPageComponent implements OnInit {
       title: 'Gerenciar Pedidos',
       subtitle: 'Reintegre pedidos específicos ou múltiplos pedidos',
       buttonText: 'Acessar pedidos',
+      active: () => {
+        this.router.navigate(['orders/reintegrate']);
+      },
     },
     {
       title: 'Visualizar Logs',
       subtitle: 'Consulte logs de histórico e estatísticas',
       buttonText: 'Ver logs',
+      active: () => {
+        this.router.navigate(['logs']);
+      },
     },
     {
       title: 'Monitorar Filas',
       subtitle: 'Acompanhe o status das filas de processamento',
       buttonText: 'Ver filas',
+      active: () => {
+        this.router.navigate(['monitoring-queues']);
+      }
     },
   ];
 
@@ -33,7 +43,7 @@ export class DashboardPageComponent implements OnInit {
 
   isLoading: boolean = false;
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService, private router: Router) {}
 
   ngOnInit(): void {
     this.onList();

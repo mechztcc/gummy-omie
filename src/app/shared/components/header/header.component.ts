@@ -10,6 +10,11 @@ import { SidebarStore } from '../../stores/sidebar/sidebar.store';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  get name() {
+    return localStorage.getItem('username') || '';
+  }
+
+  
   store = inject(SidebarStore);
 
   icons: any = {

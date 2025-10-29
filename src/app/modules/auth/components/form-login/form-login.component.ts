@@ -56,7 +56,10 @@ export class FormLoginComponent {
       .onLogin(payload)
       .subscribe((resp) => {
         const token = resp.token || '';
+        const username = resp.username || '';
+
         localStorage.setItem('token', token);
+        localStorage.setItem('username', username);
 
         this.toastr.onHandle('Login realizado com sucesso!', 'success');
         this.form.reset();

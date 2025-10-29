@@ -34,18 +34,21 @@ export class SidebarComponent {
 
   store = inject(SidebarStore);
 
-  constructor(private router: Router, private routes: ActivatedRoute) {
-  }
+  constructor(private router: Router, private routes: ActivatedRoute) {}
 
   items: SidebarItem[] = [
     {
       label: 'Dashboard',
       icon: faHouse,
       action: () => {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
       },
       active: () => {
-        return window.location.href.includes('dashboard');
+        return (
+          !window.location.href.includes('monitoring-queues') &&
+          !window.location.href.includes('orders/reintegrate') &&
+          !window.location.href.includes('logs')
+        );
       },
     },
     {
